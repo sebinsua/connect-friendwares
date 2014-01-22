@@ -18,7 +18,7 @@ var connect     = require('connect'),
     http        = require('http'),
     friendwares = require('connnect-friendwares');
 
-var app = connect(),
+var app = connect()
   .use(require('compression')())
   .use(function (req, res) {
     if (friendwares(app.stack).has('compression')) {
