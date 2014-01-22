@@ -1,9 +1,15 @@
-// See: https://github.com/visionmedia/express/blob/c3bd65eda2fd6abe9775d32da4944e802111de1a/lib/middleware.js#L20
 var isArray = function (value) { return Object.prototype.toString.call(value) === '[object Array]'; };
 
-exports = module.exports = function (appOwnedMiddlewareStack) {
+exports = module.exports = (function (appOrStack) {
     
-    this.length = appOwnedMiddlewareStack.length;
+    var appOwnedMiddlewareStack;
+    if (isArray(appOrStack)) {
+        appOwnedMiddlewareStack = appOrStack;
+    } else if (appOrStack && appOrStack.stack) {
+        appOwnedMiddlewareStack = appOrStack.stack;
+    } else {
+        throw new Error("friendware should be instantiated with a middleware stack.");
+    }
 
     this.getMiddlewareNames = function () {
         return appOwnedMiddlewareStack.map(function (middleware) {
@@ -16,6 +22,8 @@ exports = module.exports = function (appOwnedMiddlewareStack) {
 
         return this._at(appOwnedMiddlewareNames, middlewareName);
     };
+
+    // @todo: what routes are on the middlewares?
 
     this.has = function (middlewareNamesToCheck) {
         if (!middlewareNamesToCheck) {
@@ -54,4 +62,5 @@ exports = module.exports = function (appOwnedMiddlewareStack) {
         return allExist;
     };
 
-};
+    return this;
+}).bind({});
