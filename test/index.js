@@ -93,7 +93,6 @@ describe('friendwares', function () {
             ]);
         });
 
-
         xit('should X', function () {
             true.should.be.false;
         });
