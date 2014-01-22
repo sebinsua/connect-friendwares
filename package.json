@@ -1,0 +1,28 @@
+{
+  "name"            : "connect-friendwares",
+  "description"     : "A connect helper so that middlewares can see their friends.",
+  "homepage"        : "https://github.com/sebinsua/connect-friendwares",
+  "keywords"        : [
+    "connect",
+    "middlewares",
+    "friends"
+  ],
+  "author"          : "Seb Insua <me@sebinsua.com>",
+  "repository"      : {
+    "type": "git",
+    "url": "git://github.com/sebinsua/connect-friendwares.git"
+  },
+  "main"            : "./index.js",
+  "version"         : "0.0.1",
+  "devDependencies" : {
+    "mocha": "*",
+    "chai": "*",
+    "jshint": "latest"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "test": "make test"
+  }
+}
