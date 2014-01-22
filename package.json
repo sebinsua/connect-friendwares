@@ -13,7 +13,7 @@
     "url": "git://github.com/sebinsua/connect-friendwares.git"
   },
   "main"            : "./index.js",
-  "version"         : "0.0.1",
+  "version"         : "0.0.2",
   "devDependencies" : {
     "mocha": "*",
     "chai": "*",
