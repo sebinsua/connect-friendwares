@@ -5,6 +5,11 @@ connect-friendwares
 
 A connect helper so that middlewares can see their friends.
 
+Why?
+----
+
+I wanted to make it quick and easy to detect from a middleware whether it is being used by Express or not. This would allow you to give an error message or reduced functionality unless the correct middlewares are setup.
+
 Usage
 -----
 
