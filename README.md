@@ -1,6 +1,8 @@
 connect-friendwares
 ===================
 
+[![Build Status](https://travis-ci.org/sebinsua/connect-friendwares.png)](https://travis-ci.org/sebinsua/connect-friendwares)
+
 A connect helper so that middlewares can see their friends.
 
 Usage
