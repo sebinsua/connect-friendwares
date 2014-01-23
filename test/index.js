@@ -41,7 +41,7 @@ describe('friendwares', function () {
         });
     });
 
-    describe('at()', function () {
+    describe('index()', function () {
         var friendwaresInstance;
         beforeEach(function () {
             friendwaresInstance = friendwares([
@@ -51,8 +51,14 @@ describe('friendwares', function () {
             ]);
         });
 
-        xit('should X', function () {
-            true.should.be.false;
+        it('should return false if the route cannot be found', function () {
+            var index = friendwaresInstance.index('failfail');
+            index.should.be.false;
+        });
+
+        it('should return correct index if the route can be found', function () {
+            var index = friendwaresInstance.index('compress');
+            index.should.equal(1);
         });
     });
 
@@ -84,17 +90,33 @@ describe('friendwares', function () {
     });
 
     describe('hasBeforeCurrent()', function () {
-        var friendwaresInstance;
-        beforeEach(function () {
-            friendwaresInstance = friendwares([
+        var friendwaresInstance,
+            middlewares = [
+                { route: '', handle: function query() {} },
                 { route: '', handle: function expressInit() {} },
                 { route: '', handle: function compress() {} },
                 { route: '', handle: function () {} }
-            ]);
+            ];
+        beforeEach(function () {
+            friendwaresInstance = friendwares(middlewares);
         });
 
-        xit('should X', function () {
-            true.should.be.false;
+        it('should be able to test for a middleware that exists before a middleware function', function () {
+            friendwaresInstance.hasBeforeCurrent('query', middlewares[2].handle).should.be.true;
+        });
+
+        it('should be able to test for a middleware does not exist before a middleware function', function () {
+            friendwaresInstance.hasBeforeCurrent('compress', middlewares[0].handle).should.be.false;
+        });
+
+        it('should be able to test for middlewares that does not exist before a middleware function', function () {
+            friendwaresInstance.hasBeforeCurrent(['query', 'compress'], middlewares[1].handle).should.be.false;
+        });
+
+        it('should throw an exception if you try to test for middlewares before a function which does not belong to the middleware stack', function () {
+            (function () {
+                friendwaresInstance.hasBeforeCurrent(['completelyBeyondThePoint'], function thisDoesNotExistInThatStackFool() {});
+            }).should.throw(Error, "The current middleware does not belong to the middleware stack you are testing.");
         });
     });
 
