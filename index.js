@@ -5,8 +5,8 @@ exports = module.exports = (function (appOrStack) {
     var appOwnedMiddlewareStack;
     if (isArray(appOrStack)) {
         appOwnedMiddlewareStack = appOrStack;
-    } else if (appOrStack && appOrStack.stack) {
-        appOwnedMiddlewareStack = appOrStack.stack;
+    } else if (appOrStack) {
+        appOwnedMiddlewareStack = appOrStack.stack || appOrStack._router.stack;
     } else {
         throw new Error("friendware should be instantiated with a middleware stack.");
     }
